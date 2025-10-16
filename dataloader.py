@@ -3,10 +3,10 @@ import cv2
 from matplotlib import pyplot as plt
 from torch.utils import data
 from torch.utils.data import DataLoader
-from dependency_SPC import *
+from dependency import *
 import torch
 import numpy as np
-from utils_SPC import encode_label,encode_meta_label
+from utils import encode_label,encode_meta_label
 from tensorflow.keras.utils import to_categorical
 import albumentations
 import os
@@ -252,3 +252,4 @@ def generate_dataloader(shape,batch_size,num_workers,data_mode):
           shuffle=False)
 
     return train_dataloader, val_dataloader
+
