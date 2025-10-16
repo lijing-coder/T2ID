@@ -1,9 +1,9 @@
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-from dataloader_SPC import generate_dataloader
-from utils_SPC import Logger, adjust_learning_rate, CraateLogger,create_cosine_learing_schdule,encode_test_label,set_seed
+from dataloader import generate_dataloader
+from utils import Logger, adjust_learning_rate, CraateLogger,create_cosine_learing_schdule,encode_test_label,set_seed
 from model.T2MD import T2MD
-from dependency_SPC import *
+from dependency import *
 from torch import optim
 from torchcontrib.optim import SWA
 import torch
@@ -168,3 +168,4 @@ if __name__ == '__main__':
       # create learning schdule
         cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
         run_train(model_name,mode,i)
+
