@@ -1,4 +1,4 @@
-from dependency_SPC import *
+from dependency import *
 from tensorflow.keras.utils import to_categorical
 import numpy as np
 import os
@@ -345,4 +345,5 @@ def encode_meta_label_extra(img_info,index_num):
     ])
     
     return meta_vector
+
 
