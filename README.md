@@ -1,8 +1,8 @@
 # T<sup>2</sup>MD: Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration
-# Overview
+## Overview
 This repository contains the code for "T<sup>2</sup>MD: Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration"!
 ![Formula](/img/overall.png)
-# Dataset
+## Dataset
 **Skin Lesion:** Seven-Point Checklist [https://derm.cs.sfu.ca/]
 
 **AMD Diseases:** MMC-AMD [https://github.com/li-xirong/mmc-amd]
@@ -30,15 +30,15 @@ scikit-learn==0.24.1
 seaborn==0.11.2
 transformers==4.44.2
 ```
-# Usage
+## Usage
 Run the main program using Python:
 
 ```bash
 python main.py
 ```
 
-# Acknowledgement
+## Acknowledgement
 This repository is built upon [FusionM4Net](https://github.com/pixixiaonaogou/MLSDR), [MMDynamic](https://github.com/TencentAILabHealthcare/mmdynamics). Thanks again for their great works!
 
-# Contact
+## Contact
 For any questions, feel free to contact: Jing.Li2@liverpool.ac.uk
