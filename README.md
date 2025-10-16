@@ -30,6 +30,12 @@ scikit-learn==0.24.1
 seaborn==0.11.2
 transformers==4.44.2
 ```
+# Usage
+Run the main program using Python:
+
+```bash
+python main.py
+```
 
 # Acknowledgement
 This repository is built upon [FusionM4Net](https://github.com/pixixiaonaogou/MLSDR), [MMDynamic](https://github.com/TencentAILabHealthcare/mmdynamics). Thanks again for their great works!
