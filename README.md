@@ -1,6 +1,6 @@
-# T<sup>2</sup>MD: Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration
+# T<sup>2</sup>ID: Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration
 ## Overview
-This repository contains the code for "T<sup>2</sup>MD: Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration"!
+This repository contains the code for "T<sup>2</sup>ID: Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration"!
 ![Formula](/img/overall.png)
 ## Datasets
 **Skin Lesion:** Seven-Point Checklist [https://derm.cs.sfu.ca/]
