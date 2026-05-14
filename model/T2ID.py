@@ -100,7 +100,7 @@ class Confidence_Classification_SubNetwork(nn.Module):
         return logits
     
 
-class T2MD(nn.Module):
+class T2ID(nn.Module):
     def __init__(self, num_classes=5, p_missing=0.4, memory_size=500, init_top_k=5, max_top_k=20, dimension=2048, pretrained_backbone=False):
         super(T2MD, self).__init__()
         self.p_missing = p_missing
