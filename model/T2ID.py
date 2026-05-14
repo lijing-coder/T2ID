@@ -101,16 +101,17 @@ class Confidence_Classification_SubNetwork(nn.Module):
     
 
 class T2MD(nn.Module):
-    def __init__(self, num_classes=5, p_missing=0.4, memory_size=500, init_top_k=5, max_top_k=20, dimension=2048):
+    def __init__(self, num_classes=5, p_missing=0.4, memory_size=500, init_top_k=5, max_top_k=20, dimension=2048, pretrained_backbone=False):
         super(T2MD, self).__init__()
         self.p_missing = p_missing
         self.memory_size = memory_size
         self.temperature = 0.07
         self.memory_bank = deque(maxlen=memory_size)
         
-        resnet50 = torchvision.models.resnet50(pretrained=True)
-        self.fundus_branch = nn.Sequential(*list(resnet50.children())[:-1])
-        self.oct_branch = nn.Sequential(*list(resnet50.children())[:-1])
+        resnet50_fundus = torchvision.models.resnet50(weights='DEFAULT' if pretrained_backbone else None)
+        resnet50_oct = torchvision.models.resnet50(weights='DEFAULT' if pretrained_backbone else None)
+        self.fundus_branch = nn.Sequential(*list(resnet50_fundus.children())[:-1])
+        self.oct_branch = nn.Sequential(*list(resnet50_oct.children())[:-1])
 
         self.FeedForward_fundus = FeedForward_MLP(dimension, int(dimension*0.5), dropout=0.5)
         self.FeedForward_oct = FeedForward_MLP(dimension, int(dimension*0.5), dropout=0.5)
