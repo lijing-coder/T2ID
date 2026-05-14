@@ -1,7 +1,7 @@
 import argparse
 import torch
 from dataloader import build_eval_dataloader
-from model.T2ID import Base_Model
+from model.T2ID import T2ID
 
 
 def parse_args():
