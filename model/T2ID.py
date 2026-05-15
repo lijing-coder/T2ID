@@ -7,7 +7,7 @@ from collections import deque
 import numpy as np
 import os
 import math
-from Missing_function import apply_missing_fixed
+from .Missing_function import apply_missing_fixed
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
 ######STE########
@@ -47,7 +47,7 @@ class Confidence_Classification_SubNetwork(nn.Module):
 
 class T2ID(nn.Module):
     def __init__(self, num_classes=5, p_missing=0.4, memory_size=500, init_top_k=5, max_top_k=20, dimension=2048, pretrained_backbone=False):
-        super(T2MD, self).__init__()
+        super(T2ID, self).__init__()
         self.p_missing = p_missing
         self.memory_size = memory_size
         self.temperature = 0.07
@@ -150,6 +150,8 @@ class T2ID(nn.Module):
 
         fundus_features = torch.flatten(self.fundus_branch(fundus_img),1)
         oct_features = torch.flatten(self.oct_branch(oct_img),1)
+        fundus_output = fundus_features.clone()
+        oct_output = oct_features.clone()
 
         fundus_features, oct_features, missing_mask, mask1, mask2 = apply_missing_fixed(fundus_features, oct_features, p_missing=self.p_missing, mode='alternate', return_mask=True)
 
