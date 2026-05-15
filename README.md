@@ -15,7 +15,6 @@ The following Python packages are required:
 ```bash
 torch==1.13.0
 torchvision==0.14.0
-tensorflow==2.2.0
 protobuf==3.20.3
 torchcontrib==0.0.2
 numpy==1.19.5
