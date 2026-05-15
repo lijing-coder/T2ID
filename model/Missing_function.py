@@ -1,3 +1,7 @@
+import torch
+import random
+import numpy as np
+import math
 
 ######Missing########
 def apply_missing_fixed(a, v, p_missing=0.8, device='cuda', mode='alternate', return_mask=False):
