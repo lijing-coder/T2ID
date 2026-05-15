@@ -3,9 +3,9 @@ import random
 
 import numpy as np
 import torch
-from tensorflow.keras.utils import to_categorical
+import torch.nn.functional as F
 
-from dependency_MMC import *
+from dependency_MMC import LABEL_COLUMN, MMC_LABEL_LIST
 
 
 def get_parameter_number(net):
@@ -30,7 +30,6 @@ class Logger:
 
     def close(self):
         self.txt.close()
-
 
 def set_seed(seed=15):
     random.seed(seed)
@@ -58,34 +57,28 @@ def adjust_learning_rate(optimizer, lr):
 
 
 def _label_index(value, candidates):
-    for index, labels in enumerate(candidates):
-        if value in labels:
-            return index
-    raise ValueError(f'Unknown label: {value}')
+    try:
+        return candidates.index(value)
+    except ValueError as exc:
+        raise ValueError(f'Unknown {LABEL_COLUMN}: {value}') from exc
 
 
-def _one_hot(value, candidates):
-    return to_categorical(_label_index(value, candidates), len(candidates))
+def one_hot(index, num_classes):
+    """Return a PyTorch one-hot vector without depending on TensorFlow/Keras."""
+    return F.one_hot(torch.as_tensor(index, dtype=torch.long), num_classes=num_classes).float()
 
 
-def encode_label(img_info, index_num):
-    return np.array([
-        _label_index(img_info['diagnosis'][index_num], label_list),
-        _label_index(img_info['MMC_label'][index_num], MMC_label_list),
-        _label_index(img_info['streaks'][index_num], streaks_label_list),
-        _label_index(img_info['pigmentation'][index_num], pigmentation_label_list),
-        _label_index(img_info['regression_structures'][index_num], regression_structures_label_list),
-        _label_index(img_info['dots_and_globules'][index_num], dots_and_globules_label_list),
-        _label_index(img_info['blue_whitish_veil'][index_num], blue_whitish_veil_label_list),
-        _label_index(img_info['vascular_structures'][index_num], vascular_structures_label_list),
-    ])
+def encode_label(row):
+    """Encode the MMC-AMD diagnosis label for one metadata row."""
+    return _label_index(row[LABEL_COLUMN], MMC_LABEL_LIST)
 
 
-def encode_meta_label(img_info, index_num):
-    return np.hstack([
-        _one_hot(img_info['level_of_diagnostic_difficulty'][index_num], level_of_diagnostic_difficulty_label_list),
-        _one_hot(img_info['elevation'][index_num], evaluation_list),
-        _one_hot(img_info['location'][index_num], location_list),
-        _one_hot(img_info['sex'][index_num], sex_list),
-        _one_hot(img_info['management'][index_num], management_list),
-    ])
+def encode_meta_label(row):
+    """Return metadata features for one row.
+
+    The current MMC training loop does not consume tabular metadata, so this is
+    intentionally an empty torch tensor. Keeping the function preserves the
+    dataset return signature while avoiding the unused skin-lesion metadata
+    encoders and the former TensorFlow/Keras one-hot dependency.
+    """
+    return torch.empty(0, dtype=torch.float32)
