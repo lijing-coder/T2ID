@@ -20,11 +20,9 @@ torchcontrib==0.0.2
 numpy==1.19.5
 pandas==1.2.0
 pillow==10.4.0
-opencv-python==4.5.5.64
 opencv-python-headless==4.5.3.56
 matplotlib==3.6.3
 scikit-image==0.18.1
-albumentations==0.5.2
 scikit-learn==0.24.1
 seaborn==0.11.2
 transformers==4.44.2
