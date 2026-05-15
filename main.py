@@ -2,7 +2,7 @@ import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 from dataloader_MMC import generate_dataloader
 from utils_MMC import Logger, adjust_learning_rate, CraateLogger,create_cosine_learing_schdule,encode_test_label,set_seed
-from CRDNet.uncertainty_network_2d_2d_resnet_cross_indexing_r1 import Base_Model
+from model.T2ID import Base_Model
 from dependency_MMC import *
 from torch import optim
 from torchcontrib.optim import SWA
