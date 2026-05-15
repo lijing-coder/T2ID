@@ -29,6 +29,11 @@ scikit-learn==0.24.1
 seaborn==0.11.2
 transformers==4.44.2
 ```
+## Quick Start
+```bash
+python main.py
+```
+
 ## Usage
 Run the main program using Python:
 
