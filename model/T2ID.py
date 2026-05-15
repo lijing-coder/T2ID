@@ -7,6 +7,7 @@ from collections import deque
 import numpy as np
 import os
 import math
+from Missing_function import apply_missing_fixed
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
 ######STE########
