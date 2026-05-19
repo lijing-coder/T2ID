@@ -7,7 +7,6 @@ from collections import deque
 import numpy as np
 import os
 import math
-from torchvision.models.video import r3d_18, R3D_18_Weights
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 def apply_missing_fixed(a, v, p_missing=0.8, device='cuda', mode='alternate', return_mask=False):
