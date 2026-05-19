@@ -59,8 +59,8 @@ We evaluate T<sup>2</sup>ID on three public multimodal medical datasets:
 
 | Dataset | Task | Modalities | Link |
 |---|---|---|---|
-| Seven-Point Checklist | Skin lesion diagnosis | Clinical image + Dermoscopic image | [Dataset](https://derm.cs.sfu.ca/) |
 | MMC-AMD | AMD disease diagnosis | Fundus + OCT | [Dataset](https://github.com/li-xirong/mmc-amd) |
+| Seven-Point Checklist | Skin lesion diagnosis | Clinical image + Dermoscopic image | [Dataset](https://derm.cs.sfu.ca/) |
 | Harvard30k Glaucoma | Glaucoma diagnosis | Fundus + OCT | [Dataset](https://yutianyt.com/projects/fairvision30k/) |
 
 > We highly recommend using **MMC-AMD** for quick reproduction and evaluation.
