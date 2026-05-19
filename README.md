@@ -85,6 +85,7 @@ scikit-learn==0.24.1
 seaborn==0.11.2
 transformers==4.44.2
 ```
+---
 
 ## Quick Start
 
@@ -94,7 +95,7 @@ You only need a few dependencies to quickly launch the model.
 cd model/
 python T2ID.py
 ```
-
+---
 ## Usage
 
 Run the main program using Python:
@@ -102,13 +103,14 @@ Run the main program using Python:
 ```bash
 python main.py
 ```
-
+---
 ## Acknowledgement
 
 This repository is built upon [FusionM4Net](https://github.com/pixixiaonaogou/MLSDR) and [MMDynamic](https://github.com/TencentAILabHealthcare/mmdynamics).
 
 Thanks again for their great works!
 
+---
 ## Contact
 
 For any questions, feel free to contact: [Jing.Li2@liverpool.ac.uk](mailto:Jing.Li2@liverpool.ac.uk)
