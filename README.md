@@ -13,7 +13,6 @@
 ## News
 
 - **[2026.05]** Code for **T<sup>2</sup>ID** is released.
-- **[2026.XX]** Preprocessed data instructions and training scripts will be updated soon.
 
 ---
 
