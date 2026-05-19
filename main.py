@@ -77,7 +77,7 @@ def validation(net, val_dataloader):
 
             loss = criterion(logit_diagnosis_fusion, diagnosis_label) + confidence_loss
             acc = torch.true_divide(
-                metric(logits, diagnosis_label),
+                metric(logit_diagnosis_fusion, diagnosis_label),
                 clinic_image.size(0)
             )
 
@@ -166,7 +166,7 @@ if __name__ == "__main__":
         print(random_seeds + i)
 
         log, out_dir = CraateLogger(mode, model_name, i, data_mode)
-        net = Base_Model(
+        net = T2ID(
             num_classes=4,
             p_missing=0.6,
             memory_size=500
