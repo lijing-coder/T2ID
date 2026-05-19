@@ -6,7 +6,7 @@ import pandas as pd
 import torch
 from torch.utils.data import DataLoader, Dataset
 
-from dependency_MMC import (
+from dependency import (
     MMC_LABEL_TO_INDEX,
     img_info_path,
     source_dir,
