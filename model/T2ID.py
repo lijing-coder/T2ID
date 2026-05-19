@@ -157,7 +157,7 @@ class T2ID(nn.Module):
         fundus_output = fundus_features.clone()
         oct_output = oct_features.clone()
 
-        _, _, missing_mask, mask1, mask2 = apply_missing_fixed(fundus_features, oct_features, p_missing=self.p_missing, mode='oct', return_mask=True)
+        _, _, missing_mask, mask1, mask2 = apply_missing_fixed(fundus_features, oct_features, p_missing=self.p_missing, mode='alternate', return_mask=True)
         
         for i in range(batch_size):
             if missing_mask[i, 0] == 1:
