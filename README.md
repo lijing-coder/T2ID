@@ -1,14 +1,6 @@
 # T<sup>2</sup>ID: Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration
 
 <p align="center">
-  <img src="img/overall.png" width="850">
-</p>
-
-<p align="center">
-  <b>Towards Trustworthy Incomplete Modality Diagnosis via Dual-Axis Adaptive Completion and Confidence-aware Integration</b>
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/Python-3.8-blue">
   <img src="https://img.shields.io/badge/PyTorch-1.13.0-red">
   <img src="https://img.shields.io/badge/License-MIT-green">
