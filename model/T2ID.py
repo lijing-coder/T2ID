@@ -78,9 +78,9 @@ class Confidence_Classification_SubNetwork(nn.Module):
         return logits
     
 
-class Base_Model(nn.Module):
+class T2ID(nn.Module):
     def __init__(self, num_classes=5, p_missing=0.4, memory_size=500, init_top_k=5, max_top_k=20, dimension=2048):
-        super(Base_Model, self).__init__()
+        super(T2ID, self).__init__()
         self.p_missing = p_missing
         self.memory_size = memory_size
         self.temperature = 0.07
@@ -289,3 +289,11 @@ class Base_Model(nn.Module):
         c_loss = (c_loss_fundus + c_loss_oct + c_loss_fusion)*w1
 
         return Logit_fusion, feature_fusion, c_loss
+
+if __name__ == '__main__':
+    x_clic = torch.ones((32, 3, 224, 224)).cuda()
+    x_derm = torch.ones((32, 3, 224, 224)).cuda()
+    model = T2ID(num_classes=4, p_missing=0.6, memory_size=500).cuda()
+    label_test = torch.zeros(32, dtype=torch.long).cuda()
+    out = model(x_clic, x_derm, label_test, update_memory=False)
+    print(out)
