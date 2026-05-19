@@ -1,5 +1,4 @@
 import os
-
 os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 
 import torch
@@ -8,18 +7,16 @@ from torch import optim
 from torchcontrib.optim import SWA
 
 from dataloader_MMC import generate_dataloader
-from model.T2ID import Base_Model
+from model.T2ID import T2ID
 from utils_MMC import adjust_learning_rate, CraateLogger, create_cosine_learing_schdule, set_seed
 
 
 def criterion(logit, truth):
     return nn.CrossEntropyLoss()(logit, truth)
 
-
 def metric(logit, truth):
     _, prediction = torch.max(logit.data, 1)
     return torch.sum(prediction == truth)
-
 
 def train(net, train_dataloader):
     net.train()
