@@ -9,7 +9,7 @@ import os
 import math
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
-from Missing_function import apply_missing_fixed
+from .Missing_function import apply_missing_fixed
 
 ######STE########
 class BinaryGate(torch.autograd.Function):
@@ -256,7 +256,7 @@ class T2ID(nn.Module):
 
         c_loss = (c_loss_fundus + c_loss_oct + c_loss_fusion)*w1
 
-        return Logit_fusion, feature_fusion, c_loss
+        return Logit_fusion, c_loss
 
 if __name__ == '__main__':
     x_clic = torch.ones((32, 3, 224, 224)).cuda()
