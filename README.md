@@ -89,6 +89,8 @@ transformers==4.44.2
 
 ## Quick Start
 
+You only need a few dependencies to quickly launch the model.
+
 ```bash
 cd model/
 python T2ID.py
