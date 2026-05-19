@@ -106,8 +106,6 @@ python main.py
 ---
 ## Acknowledgement and Contact
 
-This repository is built upon [FusionM4Net](https://github.com/pixixiaonaogou/MLSDR) and [MMDynamic](https://github.com/TencentAILabHealthcare/mmdynamics).
-
-Thanks again for their great works!
+This repository is built upon [FusionM4Net](https://github.com/pixixiaonaogou/MLSDR) and [MMDynamic](https://github.com/TencentAILabHealthcare/mmdynamics). Thanks again for their great works!
 
 For any questions, feel free to contact: [Jing.Li2@liverpool.ac.uk](mailto:Jing.Li2@liverpool.ac.uk)
