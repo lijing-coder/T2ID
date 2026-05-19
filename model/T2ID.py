@@ -238,6 +238,28 @@ class Base_Model(nn.Module):
                                 oct_features[i].detach().clone(),
                                 label[i].detach().clone()
                             ))
+                    
+                     '''
+                     ################################################################################
+                     If your dataset is relatively complex, you can use bimodal similarity computing.
+                     ################################################################################
+                     else:
+                        fundus_set = torch.stack([p[0] for p in self.memory_bank])
+                        oct_set = torch.stack([p[1] for p in self.memory_bank])
+                        fundus_similarity = F.cosine_similarity(
+                            fundus_features[i].unsqueeze(0), fundus_set, dim=1
+                        )
+                        oct_similarity = F.cosine_similarity(
+                            oct_features[i].unsqueeze(0), oct_set, dim=1
+                        )
+                        similarity = (fundus_similarity + oct_similarity) / 2
+                        if similarity.max() < 0.8: 
+                            self.memory_bank.append((
+                                fundus_features[i].detach().clone(),
+                                oct_features[i].detach().clone(),
+                                label[i].detach().clone()
+                            ))
+                     '''
         
         fundus_output = self.FeedForward_fundus(fundus_output)
         oct_output = self.FeedForward_oct(oct_output)
@@ -270,5 +292,4 @@ class Base_Model(nn.Module):
 
         c_loss = (c_loss_fundus + c_loss_oct + c_loss_fusion)*w1
 
-        #return Logit, feature, k_values, gate_decisions, c_loss, kd_loss
         return Logit_fusion, feature_fusion, c_loss
