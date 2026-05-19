@@ -29,7 +29,8 @@ transformers==4.44.2
 ```
 ## Quick Start
 ```bash
-python main.py
+cd model/
+python T2ID.py
 ```
 
 ## Usage
