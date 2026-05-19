@@ -271,9 +271,6 @@ class Base_Model(nn.Module):
 
         TCPLogit_fundus = self.Classification_fundus(fundus_output)
         TCPLogit_oct = self.Classification_oct(oct_output)
-
-        pred_fundus = torch.argmax(TCPLogit_fundus, dim=1)
-        pred_oct = torch.argmax(TCPLogit_oct, dim=1)
         
         fundus_output = fundus_output * TCPConfidence_fundus
         oct_output = oct_output * TCPConfidence_oct
@@ -284,7 +281,6 @@ class Base_Model(nn.Module):
         Confidence_fusion = torch.sigmoid(Confidence_fusion)
         feature_fusion = feature_fusion * Confidence_fusion
         Logit_fusion = self.Classification_fusion(feature_fusion)
-        pred_fusion = torch.argmax(Logit_fusion, dim=1)
         
         c_loss_fundus = self.confidence_loss(TCPLogit_fundus, TCPConfidence_fundus, label)
         c_loss_oct = self.confidence_loss(TCPLogit_oct, TCPConfidence_oct, label)
