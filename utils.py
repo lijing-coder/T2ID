@@ -4,7 +4,7 @@ import random
 import numpy as np
 import torch
 
-from dependency_MMC import MMC_LABEL_TO_INDEX
+from dependency import MMC_LABEL_TO_INDEX
 
 
 def set_seed(seed=42):
