@@ -5,10 +5,10 @@ import torch
 import torch.nn as nn
 from torch import optim
 
-from dataloader_MMC import generate_dataloader
-from utils_MMC import adjust_learning_rate, CraateLogger, create_cosine_learing_schdule, set_seed
+from dataloader import generate_dataloader
+from utils import adjust_learning_rate, CraateLogger, create_cosine_learing_schdule, set_seed
 from model.T2ID import T2ID
-from dependency_MMC import *
+from dependency import *
 
 def criterion(logit, truth):
     return nn.CrossEntropyLoss()(logit, truth)
