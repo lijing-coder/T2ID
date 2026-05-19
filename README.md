@@ -5,7 +5,7 @@ This repository contains the code for "T<sup>2</sup>ID: Towards Trustworthy Inco
 ## Datasets
 **Skin Lesion:** Seven-Point Checklist [https://derm.cs.sfu.ca/]
 
-**AMD Diseases:** MMC-AMD [https://github.com/li-xirong/mmc-amd]
+**AMD Diseases:** MMC-AMD [https://github.com/li-xirong/mmc-amd] (Highly Recommended \star)
 
 **Glaucoma Diseases:** Harvard30k Glaucoma [https://yutianyt.com/projects/fairvision30k/]
 ## Dependencies
