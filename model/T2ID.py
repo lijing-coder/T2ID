@@ -238,12 +238,11 @@ class T2ID(nn.Module):
                                 oct_features[i].detach().clone(),
                                 label[i].detach().clone()
                             ))
-                    
-                     '''
-                     ################################################################################
-                     If your dataset is relatively complex, you can use bimodal similarity computing.
-                     ################################################################################
-                     else:
+                    '''
+                    ################################################################################
+                    If your dataset is relatively complex, you can use bimodal similarity computing.
+                    ################################################################################
+                    else:
                         fundus_set = torch.stack([p[0] for p in self.memory_bank])
                         oct_set = torch.stack([p[1] for p in self.memory_bank])
                         fundus_similarity = F.cosine_similarity(
@@ -259,7 +258,7 @@ class T2ID(nn.Module):
                                 oct_features[i].detach().clone(),
                                 label[i].detach().clone()
                             ))
-                     '''
+                    '''
         
         fundus_output = self.FeedForward_fundus(fundus_output)
         oct_output = self.FeedForward_oct(oct_output)
