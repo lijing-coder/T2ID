@@ -3,82 +3,74 @@ import random
 
 import numpy as np
 import torch
-import torch.nn.functional as F
 
-from dependency_MMC import LABEL_COLUMN, MMC_LABEL_LIST
-
-
-def get_parameter_number(net):
-    return {
-        'Total': sum(p.numel() for p in net.parameters()),
-        'Trainable': sum(p.numel() for p in net.parameters() if p.requires_grad),
-    }
+from dependency_MMC import MMC_LABEL_TO_INDEX
 
 
-def create_cosine_learing_schdule(epochs, lr):
-    return [float(lr / 2 * (np.cos(np.pi * epoch / epochs) + 1)) for epoch in range(epochs)]
-
-
-class Logger:
-    def open(self, name, mode):
-        self.txt = open(name, mode=mode)
-
-    def write(self, str_):
-        self.txt.write(str_)
-        self.txt.flush()
-        print(str_, end='')
-
-    def close(self):
-        self.txt.close()
-
-def set_seed(seed=15):
+def set_seed(seed=42):
     random.seed(seed)
-    os.environ['PYTHONHASHSEED'] = str(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
     np.random.seed(seed)
+
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
+
     torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 
-def CraateLogger(mode, model_name='resnet-50', round_=None, data_mode='Normal'):
-    out_dir = './{}_{}_{}_weight_file/{}/'.format(mode, model_name, data_mode, round_)
-    os.makedirs(out_dir + '/checkpoint/', exist_ok=True)
-    os.makedirs(out_dir + '/train/', exist_ok=True)
-
-    log = Logger()
-    log.open(out_dir + '/log.single_modality_{}_skinlesion.txt'.format(mode), mode='w')
-    return log, out_dir
+def create_cosine_learing_schdule(epochs, lr):
+    return [
+        float(lr * 0.5 * (1.0 + np.cos(np.pi * epoch / epochs)))
+        for epoch in range(epochs)
+    ]
 
 
 def adjust_learning_rate(optimizer, lr):
     for param_group in optimizer.param_groups:
-        param_group['lr'] = lr
+        param_group["lr"] = lr
 
 
-def _label_index(value, candidates):
-    try:
-        return candidates.index(value)
-    except ValueError as exc:
-        raise ValueError(f'Unknown {LABEL_COLUMN}: {value}') from exc
+class Logger:
+    def open(self, path, mode="w"):
+        self.txt = open(path, mode)
+
+    def write(self, message):
+        self.txt.write(message)
+        self.txt.flush()
+        print(message, end="" if message.endswith("\n") else "\n")
+
+    def close(self):
+        self.txt.close()
 
 
-def one_hot(index, num_classes):
-    """Return a PyTorch one-hot vector without depending on TensorFlow/Keras."""
-    return F.one_hot(torch.as_tensor(index, dtype=torch.long), num_classes=num_classes).float()
+def CraateLogger(mode, model_name="model", round_=0, data_mode="Normal"):
+    out_dir = f"./{mode}_{model_name}_{data_mode}_weight_file/{round_}"
+    checkpoint_dir = os.path.join(out_dir, "checkpoint")
+    os.makedirs(checkpoint_dir, exist_ok=True)
+
+    log = Logger()
+    log.open(os.path.join(out_dir, f"log_{mode}.txt"), mode="w")
+    log.write(f"--- Start training ---\n")
+    log.write(f"out_dir: {out_dir}\n")
+    log.write(f"mode: {mode}\n")
+    log.write(f"model_name: {model_name}\n")
+    log.write(f"data_mode: {data_mode}\n\n")
+
+    return log, out_dir
 
 
-def encode_label(row):
-    """Encode the MMC-AMD diagnosis label for one metadata row."""
-    return _label_index(row[LABEL_COLUMN], MMC_LABEL_LIST)
+def encode_label(img_info, index_num):
+    row = img_info.loc[index_num]
+    mmc_label = MMC_LABEL_TO_INDEX[row["MMC_label"]]
+    return np.array([mmc_label, mmc_label])
 
 
-def encode_meta_label(row):
-    """Return metadata features for one row.
+def encode_test_label(img_info, index_num):
+    label = encode_label(img_info, index_num)
+    return label
 
-    The current MMC training loop does not consume tabular metadata, so this is
-    intentionally an empty torch tensor. Keeping the function preserves the
-    dataset return signature while avoiding the unused skin-lesion metadata
-    encoders and the former TensorFlow/Keras one-hot dependency.
-    """
-    return torch.empty(0, dtype=torch.float32)
+
+def encode_meta_label(img_info, index_num):
+    return np.empty(0, dtype=np.float32)
